@@ -1,5 +1,4 @@
 class MoreLooks {
-    // Initialize the extension with a name and category
     getInfo() {
         return {
             id: 'morelooks',
@@ -27,7 +26,7 @@ class MoreLooks {
                             defaultValue: 1
                         }
                     },
-                    func: 'nextCostumes'
+                    function: 'nextCostumes'
                 },
                 {
                     opcode: 'previousCostumes',
@@ -39,7 +38,7 @@ class MoreLooks {
                             defaultValue: 1
                         }
                     },
-                    func: 'previousCostumes'
+                    function: 'previousCostumes'
                 },
                 {
                     opcode: 'nextBackdrops',
@@ -51,7 +50,7 @@ class MoreLooks {
                             defaultValue: 1
                         }
                     },
-                    func: 'nextBackdrops'
+                    function: 'nextBackdrops'
                 },
                 {
                     opcode: 'previousBackdrops',
@@ -63,54 +62,54 @@ class MoreLooks {
                             defaultValue: 1
                         }
                     },
-                    func: 'previousBackdrops'
+                    function: 'previousBackdrops'
                 }
             ]
         };
     }
 
-    // Function to switch to the previous costume
+    // Switch to the previous costume
     previousCostume(args, util) {
         const sprite = util.target;
-        const costumeCount = sprite.getCostumes().length;
-        sprite.setCostume((sprite.currentCostume - 1 + costumeCount) % costumeCount);
+        const costumeCount = sprite.costumes.length;
+        sprite.currentCostumeIndex = (sprite.currentCostumeIndex - 1 + costumeCount) % costumeCount;
     }
 
-    // Function to switch to the previous backdrop
+    // Switch to the previous backdrop
     previousBackdrop(args, util) {
         const stage = util.runtime.getTargetForStage();
-        const backdropCount = stage.getCostumes().length;
-        stage.setCostume((stage.currentCostume - 1 + backdropCount) % backdropCount);
+        const backdropCount = stage.costumes.length;
+        stage.currentCostumeIndex = (stage.currentCostumeIndex - 1 + backdropCount) % backdropCount;
     }
 
-    // Function to switch to the next N costumes
+    // Switch to the next N costumes
     nextCostumes(args, util) {
         const sprite = util.target;
-        const costumeCount = sprite.getCostumes().length;
-        sprite.setCostume((sprite.currentCostume + Number(args.n)) % costumeCount);
+        const costumeCount = sprite.costumes.length;
+        sprite.currentCostumeIndex = (sprite.currentCostumeIndex + Number(args.n)) % costumeCount;
     }
 
-    // Function to switch to the previous N costumes
+    // Switch to the previous N costumes
     previousCostumes(args, util) {
         const sprite = util.target;
-        const costumeCount = sprite.getCostumes().length;
-        sprite.setCostume((sprite.currentCostume - Number(args.n) + costumeCount) % costumeCount);
+        const costumeCount = sprite.costumes.length;
+        sprite.currentCostumeIndex = (sprite.currentCostumeIndex - Number(args.n) + costumeCount) % costumeCount;
     }
 
-    // Function to switch to the next N backdrops
+    // Switch to the next N backdrops
     nextBackdrops(args, util) {
         const stage = util.runtime.getTargetForStage();
-        const backdropCount = stage.getCostumes().length;
-        stage.setCostume((stage.currentCostume + Number(args.n)) % backdropCount);
+        const backdropCount = stage.costumes.length;
+        stage.currentCostumeIndex = (stage.currentCostumeIndex + Number(args.n)) % backdropCount;
     }
 
-    // Function to switch to the previous N backdrops
+    // Switch to the previous N backdrops
     previousBackdrops(args, util) {
         const stage = util.runtime.getTargetForStage();
-        const backdropCount = stage.getCostumes().length;
-        stage.setCostume((stage.currentCostume - Number(args.n) + backdropCount) % backdropCount);
+        const backdropCount = stage.costumes.length;
+        stage.currentCostumeIndex = (stage.currentCostumeIndex - Number(args.n) + backdropCount) % backdropCount;
     }
 }
 
-// Register the extension in Turbowarp
+// Register the extension in TurboWarp
 Scratch.extensions.register(new MoreLooks());
