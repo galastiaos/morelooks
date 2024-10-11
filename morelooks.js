@@ -8,13 +8,13 @@ class MoreLooks {
                     opcode: 'previousCostume',
                     blockType: Scratch.BlockType.COMMAND,
                     text: 'previous costume',
-                    function: 'previousCostume'
+                    func: 'previousCostume'
                 },
                 {
                     opcode: 'previousBackdrop',
                     blockType: Scratch.BlockType.COMMAND,
                     text: 'previous backdrop',
-                    function: 'previousBackdrop'
+                    func: 'previousBackdrop'
                 },
                 {
                     opcode: 'nextCostumes',
@@ -26,7 +26,7 @@ class MoreLooks {
                             defaultValue: 1
                         }
                     },
-                    function: 'nextCostumes'
+                    func: 'nextCostumes'
                 },
                 {
                     opcode: 'previousCostumes',
@@ -38,7 +38,7 @@ class MoreLooks {
                             defaultValue: 1
                         }
                     },
-                    function: 'previousCostumes'
+                    func: 'previousCostumes'
                 },
                 {
                     opcode: 'nextBackdrops',
@@ -50,7 +50,7 @@ class MoreLooks {
                             defaultValue: 1
                         }
                     },
-                    function: 'nextBackdrops'
+                    func: 'nextBackdrops'
                 },
                 {
                     opcode: 'previousBackdrops',
@@ -62,7 +62,7 @@ class MoreLooks {
                             defaultValue: 1
                         }
                     },
-                    function: 'previousBackdrops'
+                    func: 'previousBackdrops'
                 }
             ]
         };
@@ -70,7 +70,10 @@ class MoreLooks {
 
     // Switch to the previous costume
     previousCostume(args, util) {
-        console.log("previousCostume called");
+        if (!util.target) {
+            console.error("No target found for previous costume");
+            return;
+        }
         const sprite = util.target;
         const costumeCount = sprite.getCostumes().length;
         const currentIndex = sprite.getCostumeIndex(); // Get current costume index
@@ -79,7 +82,10 @@ class MoreLooks {
 
     // Switch to the previous backdrop
     previousBackdrop(args, util) {
-        console.log("previousBackdrop called");
+        if (!util.runtime) {
+            console.error("No runtime found for previous backdrop");
+            return;
+        }
         const stage = util.runtime.getTargetForStage();
         const backdropCount = stage.getCostumes().length;
         const currentIndex = stage.getCostumeIndex();
@@ -88,7 +94,10 @@ class MoreLooks {
 
     // Switch to the next N costumes
     nextCostumes(args, util) {
-        console.log("nextCostumes called with n =", args.n);
+        if (!util.target) {
+            console.error("No target found for next costumes");
+            return;
+        }
         const sprite = util.target;
         const costumeCount = sprite.getCostumes().length;
         const currentIndex = sprite.getCostumeIndex();
@@ -97,7 +106,10 @@ class MoreLooks {
 
     // Switch to the previous N costumes
     previousCostumes(args, util) {
-        console.log("previousCostumes called with n =", args.n);
+        if (!util.target) {
+            console.error("No target found for previous costumes");
+            return;
+        }
         const sprite = util.target;
         const costumeCount = sprite.getCostumes().length;
         const currentIndex = sprite.getCostumeIndex();
@@ -106,7 +118,10 @@ class MoreLooks {
 
     // Switch to the next N backdrops
     nextBackdrops(args, util) {
-        console.log("nextBackdrops called with n =", args.n);
+        if (!util.runtime) {
+            console.error("No runtime found for next backdrops");
+            return;
+        }
         const stage = util.runtime.getTargetForStage();
         const backdropCount = stage.getCostumes().length;
         const currentIndex = stage.getCostumeIndex();
@@ -115,7 +130,10 @@ class MoreLooks {
 
     // Switch to the previous N backdrops
     previousBackdrops(args, util) {
-        console.log("previousBackdrops called with n =", args.n);
+        if (!util.runtime) {
+            console.error("No runtime found for previous backdrops");
+            return;
+        }
         const stage = util.runtime.getTargetForStage();
         const backdropCount = stage.getCostumes().length;
         const currentIndex = stage.getCostumeIndex();
