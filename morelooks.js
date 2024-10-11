@@ -8,13 +8,13 @@ class MoreLooks {
                     opcode: 'previousCostume',
                     blockType: Scratch.BlockType.COMMAND,
                     text: 'previous costume',
-                    func: 'previousCostume'
+                    function: 'previousCostume'
                 },
                 {
                     opcode: 'previousBackdrop',
                     blockType: Scratch.BlockType.COMMAND,
                     text: 'previous backdrop',
-                    func: 'previousBackdrop'
+                    function: 'previousBackdrop'
                 },
                 {
                     opcode: 'nextCostumes',
@@ -70,44 +70,56 @@ class MoreLooks {
 
     // Switch to the previous costume
     previousCostume(args, util) {
+        console.log("previousCostume called");
         const sprite = util.target;
-        const costumeCount = sprite.costumes.length;
-        sprite.currentCostumeIndex = (sprite.currentCostumeIndex - 1 + costumeCount) % costumeCount;
+        const costumeCount = sprite.getCostumes().length;
+        const currentIndex = sprite.getCostumeIndex(); // Get current costume index
+        sprite.setCostume((currentIndex - 1 + costumeCount) % costumeCount);
     }
 
     // Switch to the previous backdrop
     previousBackdrop(args, util) {
+        console.log("previousBackdrop called");
         const stage = util.runtime.getTargetForStage();
-        const backdropCount = stage.costumes.length;
-        stage.currentCostumeIndex = (stage.currentCostumeIndex - 1 + backdropCount) % backdropCount;
+        const backdropCount = stage.getCostumes().length;
+        const currentIndex = stage.getCostumeIndex();
+        stage.setCostume((currentIndex - 1 + backdropCount) % backdropCount);
     }
 
     // Switch to the next N costumes
     nextCostumes(args, util) {
+        console.log("nextCostumes called with n =", args.n);
         const sprite = util.target;
-        const costumeCount = sprite.costumes.length;
-        sprite.currentCostumeIndex = (sprite.currentCostumeIndex + Number(args.n)) % costumeCount;
+        const costumeCount = sprite.getCostumes().length;
+        const currentIndex = sprite.getCostumeIndex();
+        sprite.setCostume((currentIndex + Number(args.n)) % costumeCount);
     }
 
     // Switch to the previous N costumes
     previousCostumes(args, util) {
+        console.log("previousCostumes called with n =", args.n);
         const sprite = util.target;
-        const costumeCount = sprite.costumes.length;
-        sprite.currentCostumeIndex = (sprite.currentCostumeIndex - Number(args.n) + costumeCount) % costumeCount;
+        const costumeCount = sprite.getCostumes().length;
+        const currentIndex = sprite.getCostumeIndex();
+        sprite.setCostume((currentIndex - Number(args.n) + costumeCount) % costumeCount);
     }
 
     // Switch to the next N backdrops
     nextBackdrops(args, util) {
+        console.log("nextBackdrops called with n =", args.n);
         const stage = util.runtime.getTargetForStage();
-        const backdropCount = stage.costumes.length;
-        stage.currentCostumeIndex = (stage.currentCostumeIndex + Number(args.n)) % backdropCount;
+        const backdropCount = stage.getCostumes().length;
+        const currentIndex = stage.getCostumeIndex();
+        stage.setCostume((currentIndex + Number(args.n)) % backdropCount);
     }
 
     // Switch to the previous N backdrops
     previousBackdrops(args, util) {
+        console.log("previousBackdrops called with n =", args.n);
         const stage = util.runtime.getTargetForStage();
-        const backdropCount = stage.costumes.length;
-        stage.currentCostumeIndex = (stage.currentCostumeIndex - Number(args.n) + backdropCount) % backdropCount;
+        const backdropCount = stage.getCostumes().length;
+        const currentIndex = stage.getCostumeIndex();
+        stage.setCostume((currentIndex - Number(args.n) + backdropCount) % backdropCount);
     }
 }
 
